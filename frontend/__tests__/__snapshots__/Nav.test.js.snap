@@ -15,15 +15,5 @@ exports[`<Nav/> renders a minimal nav when signed out 1`] = `
       Tools
     </a>
   </Link>
-  <Link
-    href="/signup"
-  >
-    <a
-      href="/signup"
-      onClick={[Function]}
-    >
-      Sign In
-    </a>
-  </Link>
 </ul>
 `;

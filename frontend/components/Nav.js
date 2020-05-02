@@ -24,12 +24,12 @@ const Nav = () => (
             <Signout />
           </>
         )}
-        {!me && (
+        {/* {!me && (
           <Link href="/signup">
             <a>Sign In</a>
           </Link>
 
-        )}
+        )} */}
       </NavStyles>
     )
     }}
