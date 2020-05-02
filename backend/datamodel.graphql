@@ -24,7 +24,7 @@ type Tool {
   image: String
   largeImage: String
   url: String!
-  # user: User!
+  user: User!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

@@ -35,15 +35,12 @@ class UpdateTool extends Component {
   };
   updateTool = async (e, updateToolMutation) => {
     e.preventDefault();
-    console.log('Updating Tool!!');
-    console.log(this.state);
     const res = await updateToolMutation({
       variables: {
         id: this.props.id,
         ...this.state,
       },
     });
-    console.log('Updated!!');
   };
 
   render() {

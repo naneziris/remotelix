@@ -29,7 +29,6 @@ describe('<Nav/>', () => {
     );
     await wait();
     wrapper.update();
-    // console.log(wrapper.debug());
     const nav = wrapper.find('ul[data-test="nav"]');
     expect(toJSON(nav)).toMatchSnapshot();
   });

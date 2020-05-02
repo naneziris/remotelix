@@ -9,7 +9,7 @@ const transport = nodemailer.createTransport({
   },
 });
 
-const makeANiceEmail = text => `
+const requestResetEmail = text => `
   <div className="email" style="
     border: 1px solid black;
     padding: 20px;
@@ -20,9 +20,9 @@ const makeANiceEmail = text => `
     <h2>Hello There!</h2>
     <p>${text}</p>
 
-    <p>😘, Wes Bos</p>
+    <p>👌, Nikos Aneziris</p>
   </div>
 `;
 
 exports.transport = transport;
-exports.makeANiceEmail = makeANiceEmail;
+exports.requestResetEmail = requestResetEmail;

@@ -16,7 +16,6 @@ class DeleteTool extends Component {
     // manually update the cache on the client, so it matches the server
     // 1. Read the cache for the tools we want
     const data = cache.readQuery({ query: ALL_TOOLS_QUERY });
-    console.log(data, payload);
     // 2. Filter the deleted tool out of the page
     data.tools = data.tools.filter(tool => tool.id !== payload.data.deleteTool.id);
     // 3. Put the tools back!

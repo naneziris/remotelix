@@ -67,7 +67,6 @@ class CreateTool extends Component {
               // call the mutation
               const res = await createTool();
               // change them to the single tool page
-              console.log(res);
               Router.push({
                 pathname: '/tool',
                 query: { id: res.data.createTool.id },
