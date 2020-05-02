@@ -70,7 +70,7 @@ class AutoComplete extends React.Component {
                 <DropDown>
                   {this.state.tools.map((tools, index) => (
                     <DropDownItem
-                      {...getItemProps({ tool })}
+                      {...getToolsProps({ tool })}
                       key={tool.id}
                       highlighted={index === highlightedIndex}
                     >
