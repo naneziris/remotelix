@@ -47,11 +47,12 @@ class AutoComplete extends React.Component {
     resetIdCounter();
     return (
       <SearchStyles>
-        <Downshift onChange={routeToTool} toolToString={tool => (tool === null ? '' : tool.title)}>
-          {({ getInputProps, getToolsProps, isOpen, inputValue, highlightedIndex }) => (
+        <Downshift onChange={routeToTool} itemToString={tool => (tool === null ? '' : tool.title)}>
+          {({ getInputProps, getItemProps, isOpen, inputValue, highlightedIndex }) => (
             <div>
               <ApolloConsumer>
                 {client => (
+                  <>
                   <input
                     {...getInputProps({
                       type: 'search',
@@ -64,13 +65,14 @@ class AutoComplete extends React.Component {
                       },
                     })}
                   />
+                  </>
                 )}
               </ApolloConsumer>
               {isOpen && (
                 <DropDown>
-                  {this.state.tools.map((tools, index) => (
+                  {this.state.tools.map((tool, index) => (
                     <DropDownItem
-                      {...getToolsProps({ tool })}
+                      {...getItemProps({ item: tool })}
                       key={tool.id}
                       highlighted={index === highlightedIndex}
                     >
