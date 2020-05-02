@@ -5,7 +5,7 @@ import Error from './ErrorMessage';
 import styled from 'styled-components';
 import Head from 'next/head';
 
-const SingleItemStyles = styled.div`
+const SingleToolStyles = styled.div`
   max-width: 1200px;
   margin: 2rem auto;
   box-shadow: ${props => props.theme.bs};
@@ -24,21 +24,22 @@ const SingleItemStyles = styled.div`
   }
 `;
 
-const SINGLE_ITEM_QUERY = gql`
-  query SINGLE_ITEM_QUERY($id: ID!) {
-    item(where: { id: $id }) {
+const SINGLE_TOOL_QUERY = gql`
+  query SINGLE_TOOL_QUERY($id: ID!) {
+    tool(where: { id: $id }) {
       id
       title
       description
       largeImage
+      url
     }
   }
 `;
-class SingleItem extends Component {
+class SingleTool extends Component {
   render() {
     return (
       <Query
-        query={SINGLE_ITEM_QUERY}
+        query={SINGLE_TOOL_QUERY}
         variables={{
           id: this.props.id,
         }}
@@ -46,19 +47,20 @@ class SingleItem extends Component {
         {({ error, loading, data }) => {
           if (error) return <Error error={error} />;
           if (loading) return <p>Loading...</p>;
-          if (!data.item) return <p>No Item Found for {this.props.id}</p>;
-          const item = data.item;
+          if (!data.tool) return <p>No Tool Found for {this.props.id}</p>;
+          const tool = data.tool;
           return (
-            <SingleItemStyles>
+            <SingleToolStyles>
               <Head>
-                <title>Sick Fits | {item.title}</title>
+                <title>Remotelix | {tool.title}</title>
               </Head>
-              <img src={item.largeImage} alt={item.title} />
+              <img src={tool.largeImage} alt={tool.title} />
               <div className="details">
-                <h2>Viewing {item.title}</h2>
-                <p>{item.description}</p>
+                <h2>Viewing {tool.title}</h2>
+                <p>{tool.description}</p>
+                <p>{tool.url}</p>
               </div>
-            </SingleItemStyles>
+            </SingleToolStyles>
           );
         }}
       </Query>
@@ -66,5 +68,5 @@ class SingleItem extends Component {
   }
 }
 
-export default SingleItem;
-export { SINGLE_ITEM_QUERY };
+export default SingleTool;
+export { SINGLE_TOOL_QUERY };

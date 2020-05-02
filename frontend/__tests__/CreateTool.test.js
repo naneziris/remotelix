@@ -3,8 +3,8 @@ import wait from 'waait';
 import toJSON from 'enzyme-to-json';
 import Router from 'next/router';
 import { MockedProvider } from 'react-apollo/test-utils';
-import CreateItem, { CREATE_ITEM_MUTATION } from '../components/CreateItem';
-import { fakeItem } from '../lib/testUtils';
+import CreateTool, { CREATE_TOOL_MUTATION } from '../components/CreateTool';
+import { fakeTool } from '../lib/testUtils';
 
 const dogImage = 'https://dog.com/dog.jpg';
 
@@ -16,11 +16,11 @@ global.fetch = jest.fn().mockResolvedValue({
   }),
 });
 
-describe('<CreateItem/>', () => {
+describe('<CreateTool/>', () => {
   it('renders and matches snapshot', async () => {
     const wrapper = mount(
       <MockedProvider>
-        <CreateItem />
+        <CreateTool />
       </MockedProvider>
     );
     const form = wrapper.find('form[data-test="form"]');
@@ -30,13 +30,13 @@ describe('<CreateItem/>', () => {
   it('uploads a file when changed', async () => {
     const wrapper = mount(
       <MockedProvider>
-        <CreateItem />
+        <CreateTool />
       </MockedProvider>
     );
     const input = wrapper.find('input[type="file"]');
     input.simulate('change', { target: { files: ['fakedog.jpg'] } });
     await wait();
-    const component = wrapper.find('CreateItem').instance();
+    const component = wrapper.find('CreateTool').instance();
     expect(component.state.image).toEqual(dogImage);
     expect(component.state.largeImage).toEqual(dogImage);
     expect(global.fetch).toHaveBeenCalled();
@@ -46,43 +46,39 @@ describe('<CreateItem/>', () => {
   it('handles state updating', async () => {
     const wrapper = mount(
       <MockedProvider>
-        <CreateItem />
+        <CreateTool />
       </MockedProvider>
     );
     wrapper.find('#title').simulate('change', { target: { value: 'Testing', name: 'title' } });
     wrapper
-      .find('#price')
-      .simulate('change', { target: { value: 50000, name: 'price', type: 'number' } });
-    wrapper
       .find('#description')
-      .simulate('change', { target: { value: 'This is a really nice item', name: 'description' } });
+      .simulate('change', { target: { value: 'This is a really nice tool', name: 'description' } });
 
-    expect(wrapper.find('CreateItem').instance().state).toMatchObject({
+    expect(wrapper.find('CreateTool').instance().state).toMatchObject({
       title: 'Testing',
-      price: 50000,
-      description: 'This is a really nice item',
+      description: 'This is a really nice tool',
     });
   });
-  it('creates an item when the form is submitted', async () => {
-    const item = fakeItem();
+  it('creates an tool when the form is submitted', async () => {
+    const tool = fakeTool();
     const mocks = [
       {
         request: {
-          query: CREATE_ITEM_MUTATION,
+          query: CREATE_TOOL_MUTATION,
           variables: {
-            title: item.title,
-            description: item.description,
+            title: tool.title,
+            description: tool.description,
             image: '',
             largeImage: '',
-            price: item.price,
+            url: '',
           },
         },
         result: {
           data: {
-            createItem: {
-              ...fakeItem,
+            createTool: {
+              ...fakeTool,
               id: 'abc123',
-              __typename: 'Item',
+              __typename: 'Tool',
             },
           },
         },
@@ -91,22 +87,19 @@ describe('<CreateItem/>', () => {
 
     const wrapper = mount(
       <MockedProvider mocks={mocks}>
-        <CreateItem />
+        <CreateTool />
       </MockedProvider>
     );
     // simulate someone filling out the form
-    wrapper.find('#title').simulate('change', { target: { value: item.title, name: 'title' } });
-    wrapper
-      .find('#price')
-      .simulate('change', { target: { value: item.price, name: 'price', type: 'number' } });
+    wrapper.find('#title').simulate('change', { target: { value: tool.title, name: 'title' } });
     wrapper
       .find('#description')
-      .simulate('change', { target: { value: item.description, name: 'description' } });
+      .simulate('change', { target: { value: tool.description, name: 'description' } });
     // mock the router
     Router.router = { push: jest.fn() };
     wrapper.find('form').simulate('submit');
     await wait(50);
     expect(Router.router.push).toHaveBeenCalled();
-    expect(Router.router.push).toHaveBeenCalledWith({ pathname: '/item', query: { id: 'abc123' } });
+    expect(Router.router.push).toHaveBeenCalledWith({ pathname: '/tool', query: { id: 'abc123' } });
   });
 });

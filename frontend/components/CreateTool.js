@@ -3,36 +3,35 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import Form from './styles/Form';
-import formatMoney from '../lib/formatMoney';
 import Error from './ErrorMessage';
 
-const CREATE_ITEM_MUTATION = gql`
-  mutation CREATE_ITEM_MUTATION(
+const CREATE_TOOL_MUTATION = gql`
+  mutation CREATE_TOOL_MUTATION(
     $title: String!
     $description: String!
-    $price: Int!
     $image: String
     $largeImage: String
+    $url: String!
   ) {
-    createItem(
+    createTool(
       title: $title
       description: $description
-      price: $price
       image: $image
       largeImage: $largeImage
+      url: $url
     ) {
       id
     }
   }
 `;
 
-class CreateItem extends Component {
+class CreateTool extends Component {
   state = {
     title: '',
     description: '',
     image: '',
     largeImage: '',
-    price: 0,
+    url: '',
   };
   handleChange = e => {
     const { name, type, value } = e.target;
@@ -44,9 +43,9 @@ class CreateItem extends Component {
     const files = e.target.files;
     const data = new FormData();
     data.append('file', files[0]);
-    data.append('upload_preset', 'sickfits');
+    data.append('upload_preset', 'remotelix');
 
-    const res = await fetch('https://api.cloudinary.com/v1_1/wesbostutorial/image/upload', {
+    const res = await fetch('https://api.cloudinary.com/v1_1/remotelix/image/upload', {
       method: 'POST',
       body: data,
     });
@@ -58,20 +57,20 @@ class CreateItem extends Component {
   };
   render() {
     return (
-      <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
-        {(createItem, { loading, error }) => (
+      <Mutation mutation={CREATE_TOOL_MUTATION} variables={this.state}>
+        {(createTool, { loading, error }) => (
           <Form
             data-test="form"
             onSubmit={async e => {
               // Stop the form from submitting
               e.preventDefault();
               // call the mutation
-              const res = await createItem();
-              // change them to the single item page
+              const res = await createTool();
+              // change them to the single tool page
               console.log(res);
               Router.push({
-                pathname: '/item',
-                query: { id: res.data.createItem.id },
+                pathname: '/tool',
+                query: { id: res.data.createTool.id },
               });
             }}
           >
@@ -105,19 +104,6 @@ class CreateItem extends Component {
                 />
               </label>
 
-              <label htmlFor="price">
-                Price
-                <input
-                  type="number"
-                  id="price"
-                  name="price"
-                  placeholder="Price"
-                  required
-                  value={this.state.price}
-                  onChange={this.handleChange}
-                />
-              </label>
-
               <label htmlFor="description">
                 Description
                 <textarea
@@ -126,6 +112,19 @@ class CreateItem extends Component {
                   placeholder="Enter A Description"
                   required
                   value={this.state.description}
+                  onChange={this.handleChange}
+                />
+              </label>
+
+              <label htmlFor="url">
+                Url
+                <input
+                  type="text"
+                  id="url"
+                  name="url"
+                  placeholder="Url"
+                  required
+                  value={this.state.url}
                   onChange={this.handleChange}
                 />
               </label>
@@ -138,5 +137,5 @@ class CreateItem extends Component {
   }
 }
 
-export default CreateItem;
-export { CREATE_ITEM_MUTATION };
+export default CreateTool;
+export { CREATE_TOOL_MUTATION };

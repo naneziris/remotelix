@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Item/> renders and matches the snapshot 1`] = `
-<ItemStyles__Item>
+exports[`<Tool/> renders and matches the snapshot 1`] = `
+<ToolStyles__Tool>
   <img
-    alt="A Cool Item"
+    alt="A Cool tool"
     src="dog.jpg"
   />
   <Title>
     <Link
       href={
         Object {
-          "pathname": "/item",
+          "pathname": "/tool",
           "query": Object {
             "id": "ABC123",
           },
@@ -18,15 +18,15 @@ exports[`<Item/> renders and matches the snapshot 1`] = `
       }
     >
       <a>
-        A Cool Item
+        A Cool tool
       </a>
     </Link>
   </Title>
-  <PriceTag>
-    $40
-  </PriceTag>
   <p>
-    This item is really cool!
+    This tool is really cool!
+  </p>
+  <p>
+    www.remotelix.com
   </p>
   <div
     className="buttonList"
@@ -45,14 +45,11 @@ exports[`<Item/> renders and matches the snapshot 1`] = `
         Edit ✏️
       </a>
     </Link>
-    <AddToCart
-      id="ABC123"
-    />
-    <DeleteItem
+    <DeleteTool
       id="ABC123"
     >
-      Delete This Item
-    </DeleteItem>
+      Delete This Tool
+    </DeleteTool>
   </div>
-</ItemStyles__Item>
+</ToolStyles__Tool>
 `;

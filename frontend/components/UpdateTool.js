@@ -3,42 +3,41 @@ import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import Form from './styles/Form';
-import formatMoney from '../lib/formatMoney';
 import Error from './ErrorMessage';
 
-const SINGLE_ITEM_QUERY = gql`
-  query SINGLE_ITEM_QUERY($id: ID!) {
-    item(where: { id: $id }) {
+const SINGLE_TOOL_QUERY = gql`
+  query SINGLE_TOOL_QUERY($id: ID!) {
+    tool(where: { id: $id }) {
       id
       title
       description
-      price
+      url
     }
   }
 `;
-const UPDATE_ITEM_MUTATION = gql`
-  mutation UPDATE_ITEM_MUTATION($id: ID!, $title: String, $description: String, $price: Int) {
-    updateItem(id: $id, title: $title, description: $description, price: $price) {
+const UPDATE_TOOL_MUTATION = gql`
+  mutation UPDATE_TOOL_MUTATION($id: ID!, $title: String, $description: String, $url: String) {
+    updateTool(id: $id, title: $title, description: $description, url: $url) {
       id
       title
       description
-      price
+      url
     }
   }
 `;
 
-class UpdateItem extends Component {
+class UpdateTool extends Component {
   state = {};
   handleChange = e => {
     const { name, type, value } = e.target;
     const val = type === 'number' ? parseFloat(value) : value;
     this.setState({ [name]: val });
   };
-  updateItem = async (e, updateItemMutation) => {
+  updateTool = async (e, updateToolMutation) => {
     e.preventDefault();
-    console.log('Updating Item!!');
+    console.log('Updating Tool!!');
     console.log(this.state);
-    const res = await updateItemMutation({
+    const res = await updateToolMutation({
       variables: {
         id: this.props.id,
         ...this.state,
@@ -50,18 +49,18 @@ class UpdateItem extends Component {
   render() {
     return (
       <Query
-        query={SINGLE_ITEM_QUERY}
+        query={SINGLE_TOOL_QUERY}
         variables={{
           id: this.props.id,
         }}
       >
         {({ data, loading }) => {
           if (loading) return <p>Loading...</p>;
-          if (!data.item) return <p>No Item Found for ID {this.props.id}</p>;
+          if (!data.tool) return <p>No Tool Found for ID {this.props.id}</p>;
           return (
-            <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
-              {(updateItem, { loading, error }) => (
-                <Form onSubmit={e => this.updateItem(e, updateItem)}>
+            <Mutation mutation={UPDATE_TOOL_MUTATION} variables={this.state}>
+              {(updateTool, { loading, error }) => (
+                <Form onSubmit={e => this.updateTool(e, updateTool)}>
                   <Error error={error} />
                   <fieldset disabled={loading} aria-busy={loading}>
                     <label htmlFor="title">
@@ -72,20 +71,20 @@ class UpdateItem extends Component {
                         name="title"
                         placeholder="Title"
                         required
-                        defaultValue={data.item.title}
+                        defaultValue={data.tool.title}
                         onChange={this.handleChange}
                       />
                     </label>
 
-                    <label htmlFor="price">
-                      Price
+                    <label htmlFor="url">
+                      Url
                       <input
-                        type="number"
-                        id="price"
-                        name="price"
-                        placeholder="Price"
+                        type="text"
+                        id="url"
+                        name="url"
+                        placeholder="Url"
                         required
-                        defaultValue={data.item.price}
+                        defaultValue={data.tool.url}
                         onChange={this.handleChange}
                       />
                     </label>
@@ -97,7 +96,7 @@ class UpdateItem extends Component {
                         name="description"
                         placeholder="Enter A Description"
                         required
-                        defaultValue={data.item.description}
+                        defaultValue={data.tool.description}
                         onChange={this.handleChange}
                       />
                     </label>
@@ -113,5 +112,5 @@ class UpdateItem extends Component {
   }
 }
 
-export default UpdateItem;
-export { UPDATE_ITEM_MUTATION };
+export default UpdateTool;
+export { UPDATE_TOOL_MUTATION };

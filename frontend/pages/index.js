@@ -1,8 +1,8 @@
-import Items from '../components/Items';
+import Tools from '../components/Tools';
 
 const Home = props => (
   <div>
-    <Items page={parseFloat(props.query.page) || 1} />
+    <Tools page={parseFloat(props.query.page) || 1} />
   </div>
 );
 

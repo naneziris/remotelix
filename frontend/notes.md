@@ -23,11 +23,11 @@ ID
 1. First we need to add it to the database. Edit datamodel.graphql:
 
 ```js
-type Item {
+type Tool {
   id: ID! @unique
   title: String!
   description: String!
-  price: Int!
+  url: String!
 }
 ```
 

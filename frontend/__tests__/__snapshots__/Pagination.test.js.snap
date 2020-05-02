@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Pagination/> renders pagination for 18 items 1`] = `
+exports[`<Pagination/> renders pagination for 18 tools 1`] = `
 <div
-  className="PaginationStyles-aduuar-0 ewJsCc"
+  className="PaginationStyles-sc-1tw7o2f-0 eOWpvS"
   data-test="pagination"
 >
   <SideEffect(Head)>
@@ -11,7 +11,7 @@ exports[`<Pagination/> renders pagination for 18 items 1`] = `
   <Link
     href={
       Object {
-        "pathname": "items",
+        "pathname": "tools",
         "query": Object {
           "page": 0,
         },
@@ -22,7 +22,7 @@ exports[`<Pagination/> renders pagination for 18 items 1`] = `
     <a
       aria-disabled={true}
       className="prev"
-      href="items?page=0"
+      href="tools?page=0"
       onClick={[Function]}
     >
       ← Prev
@@ -41,12 +41,12 @@ exports[`<Pagination/> renders pagination for 18 items 1`] = `
   </p>
   <p>
     18
-     Items Total
+     Tools Total
   </p>
   <Link
     href={
       Object {
-        "pathname": "items",
+        "pathname": "tools",
         "query": Object {
           "page": 2,
         },
@@ -57,7 +57,7 @@ exports[`<Pagination/> renders pagination for 18 items 1`] = `
     <a
       aria-disabled={false}
       className="next"
-      href="items?page=2"
+      href="tools?page=2"
       onClick={[Function]}
     >
       Next →

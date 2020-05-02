@@ -1,27 +1,27 @@
 import { mount } from 'enzyme';
 import toJSON from 'enzyme-to-json';
 import wait from 'waait';
-import SingleItem, { SINGLE_ITEM_QUERY } from '../components/SingleItem';
+import SingleTool, { SINGLE_TOOL_QUERY } from '../components/SingleTool';
 import { MockedProvider } from 'react-apollo/test-utils';
-import { fakeItem } from '../lib/testUtils';
+import { fakeTool } from '../lib/testUtils';
 
-describe('<SingleItem/>', () => {
+describe('<SingleTool/>', () => {
   it('renders with proper data', async () => {
     const mocks = [
       {
         // when someone makes a request with this query and variable combo
-        request: { query: SINGLE_ITEM_QUERY, variables: { id: '123' } },
+        request: { query: SINGLE_TOOL_QUERY, variables: { id: '123' } },
         // return this fake data (mocked data)
         result: {
           data: {
-            item: fakeItem(),
+            tool: fakeTool(),
           },
         },
       },
     ];
     const wrapper = mount(
       <MockedProvider mocks={mocks}>
-        <SingleItem id="123" />
+        <SingleTool id="123" />
       </MockedProvider>
     );
     expect(wrapper.text()).toContain('Loading...');
@@ -33,25 +33,25 @@ describe('<SingleItem/>', () => {
     expect(toJSON(wrapper.find('p'))).toMatchSnapshot();
   });
 
-  it('Errors with a not found item', async () => {
+  it('Errors with a not found tool', async () => {
     const mocks = [
       {
-        request: { query: SINGLE_ITEM_QUERY, variables: { id: '123' } },
+        request: { query: SINGLE_TOOL_QUERY, variables: { id: '123' } },
         result: {
-          errors: [{ message: 'Items Not Found!' }],
+          errors: [{ message: 'Tools Not Found!' }],
         },
       },
     ];
     const wrapper = mount(
       <MockedProvider mocks={mocks}>
-        <SingleItem id="123" />
+        <SingleTool id="123" />
       </MockedProvider>
     );
     await wait();
     wrapper.update();
     console.log(wrapper.debug());
-    const item = wrapper.find('[data-test="graphql-error"]');
-    expect(item.text()).toContain('Items Not Found!');
-    expect(toJSON(item)).toMatchSnapshot();
+    const tool = wrapper.find('[data-test="graphql-error"]');
+    expect(tool.text()).toContain('Tools Not Found!');
+    expect(toJSON(tool)).toMatchSnapshot();
   });
 });

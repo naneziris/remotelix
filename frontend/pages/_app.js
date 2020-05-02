@@ -4,6 +4,8 @@ import { ApolloProvider } from 'react-apollo';
 import withData from '../lib/withData';
 
 class MyApp extends App {
+  // san to OnEnter sta routing policies. Kanei oti fetch
+  //  xreiazomaste prin ginei to render apo kate
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
     if (Component.getInitialProps) {

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import Nav from './Nav';
-import Cart from './Cart';
 import Search from './Search';
 
 Router.onRouteChangeStart = () => {
@@ -60,7 +59,7 @@ const Header = () => (
     <div className="bar">
       <Logo>
         <Link href="/">
-          <a>Sick Fits</a>
+          <a>Remotelix</a>
         </Link>
       </Logo>
       <Nav />
@@ -68,7 +67,6 @@ const Header = () => (
     <div className="sub-bar">
       <Search />
     </div>
-    <Cart />
   </StyledHeader>
 );
 

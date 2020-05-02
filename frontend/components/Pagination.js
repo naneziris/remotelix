@@ -9,7 +9,7 @@ import Error from './ErrorMessage';
 
 const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {
-    itemsConnection {
+    toolsConnection {
       aggregate {
         count
       }
@@ -22,20 +22,20 @@ const Pagination = props => (
     {({ data, loading, error }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <Error error={error} />;
-      const count = data.itemsConnection.aggregate.count
+      const count = data.toolsConnection.aggregate.count
       const pages = Math.ceil(count / perPage);
       const page = props.page;
       return (
         <PaginationStyles data-test="pagination">
           <Head>
             <title>
-              Sick Fits! — Page {page} of {pages}
+              Remotelix! — Page {page} of {pages}
             </title>
           </Head>
           <Link
             prefetch
             href={{
-              pathname: 'items',
+              pathname: 'tools',
               query: { page: page - 1 },
             }}
           >
@@ -47,11 +47,11 @@ const Pagination = props => (
             Page {props.page} of
             <span className="totalPages">{pages}</span>!
           </p>
-          <p>{count} Items Total</p>
+          <p>{count} Tools Total</p>
           <Link
             prefetch
             href={{
-              pathname: 'items',
+              pathname: 'tools',
               query: { page: page + 1 },
             }}
           >

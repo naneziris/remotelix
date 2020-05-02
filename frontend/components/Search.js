@@ -6,9 +6,9 @@ import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
 import { DropDown, DropDownItem, SearchStyles } from './styles/DropDown';
 
-const SEARCH_ITEMS_QUERY = gql`
-  query SEARCH_ITEMS_QUERY($searchTerm: String!) {
-    items(where: { OR: [{ title_contains: $searchTerm }, { description_contains: $searchTerm }] }) {
+const SEARCH_TOOLS_QUERY = gql`
+  query SEARCH_TOOLS_QUERY($searchTerm: String!) {
+    tools(where: { OR: [{ title_contains: $searchTerm }, { description_contains: $searchTerm }] }) {
       id
       image
       title
@@ -16,18 +16,18 @@ const SEARCH_ITEMS_QUERY = gql`
   }
 `;
 
-function routeToItem(item) {
+function routeToTool(tool) {
   Router.push({
-    pathname: '/item',
+    pathname: '/tool',
     query: {
-      id: item.id,
+      id: tool.id,
     },
   });
 }
 
 class AutoComplete extends React.Component {
   state = {
-    items: [],
+    tools: [],
     loading: false,
   };
   onChange = debounce(async (e, client) => {
@@ -36,11 +36,11 @@ class AutoComplete extends React.Component {
     this.setState({ loading: true });
     // Manually query apollo client
     const res = await client.query({
-      query: SEARCH_ITEMS_QUERY,
+      query: SEARCH_TOOLS_QUERY,
       variables: { searchTerm: e.target.value },
     });
     this.setState({
-      items: res.data.items,
+      tools: res.data.tools,
       loading: false,
     });
   }, 350);
@@ -48,15 +48,15 @@ class AutoComplete extends React.Component {
     resetIdCounter();
     return (
       <SearchStyles>
-        <Downshift onChange={routeToItem} itemToString={item => (item === null ? '' : item.title)}>
-          {({ getInputProps, getItemProps, isOpen, inputValue, highlightedIndex }) => (
+        <Downshift onChange={routeToTool} toolToString={tool => (tool === null ? '' : tool.title)}>
+          {({ getInputProps, getToolsProps, isOpen, inputValue, highlightedIndex }) => (
             <div>
               <ApolloConsumer>
                 {client => (
                   <input
                     {...getInputProps({
                       type: 'search',
-                      placeholder: 'Search For An Item',
+                      placeholder: 'Search For An Tool',
                       id: 'search',
                       className: this.state.loading ? 'loading' : '',
                       onChange: e => {
@@ -69,17 +69,17 @@ class AutoComplete extends React.Component {
               </ApolloConsumer>
               {isOpen && (
                 <DropDown>
-                  {this.state.items.map((item, index) => (
+                  {this.state.tools.map((tools, index) => (
                     <DropDownItem
-                      {...getItemProps({ item })}
-                      key={item.id}
+                      {...getItemProps({ tool })}
+                      key={tool.id}
                       highlighted={index === highlightedIndex}
                     >
-                      <img width="50" src={item.image} alt={item.title} />
-                      {item.title}
+                      <img width="50" src={tool.image} alt={tool.title} />
+                      {tool.title}
                     </DropDownItem>
                   ))}
-                  {!this.state.items.length &&
+                  {!this.state.tools.length &&
                     !this.state.loading && <DropDownItem> Nothing Found {inputValue}</DropDownItem>}
                 </DropDown>
               )}
