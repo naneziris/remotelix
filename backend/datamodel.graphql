@@ -24,6 +24,7 @@ type Tool {
   image: String
   largeImage: String
   url: String!
+  category: String
   user: User!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

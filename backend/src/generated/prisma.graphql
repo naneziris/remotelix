@@ -1,5 +1,5 @@
-# source: https://eu1.prisma.sh/naneziris-2eda21/remotelix-prisma/dev
-# timestamp: Sat May 02 2020 17:04:55 GMT+0300 (Eastern European Summer Time)
+# source: https://remo-prod-e54e756957.herokuapp.com/remo-prod/prod
+# timestamp: Sun May 03 2020 19:04:14 GMT+0300 (Eastern European Summer Time)
 
 type AggregateTool {
   count: Int!
@@ -100,6 +100,7 @@ type Tool implements Node {
   image: String
   largeImage: String
   url: String!
+  category: String
   user: User!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -122,6 +123,7 @@ input ToolCreateInput {
   image: String
   largeImage: String
   url: String!
+  category: String
   user: UserCreateOneInput!
 }
 
@@ -147,6 +149,8 @@ enum ToolOrderByInput {
   largeImage_DESC
   url_ASC
   url_DESC
+  category_ASC
+  category_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -160,6 +164,7 @@ type ToolPreviousValues {
   image: String
   largeImage: String
   url: String!
+  category: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -209,6 +214,7 @@ input ToolUpdateInput {
   image: String
   largeImage: String
   url: String
+  category: String
   user: UserUpdateOneRequiredInput
 }
 
@@ -218,6 +224,7 @@ input ToolUpdateManyMutationInput {
   image: String
   largeImage: String
   url: String
+  category: String
 }
 
 input ToolWhereInput {
@@ -469,6 +476,46 @@ input ToolWhereInput {
 
   """All values not ending with the given string."""
   url_not_ends_with: String
+  category: String
+
+  """All values that are not equal to given value."""
+  category_not: String
+
+  """All values that are contained in given list."""
+  category_in: [String!]
+
+  """All values that are not contained in given list."""
+  category_not_in: [String!]
+
+  """All values less than the given value."""
+  category_lt: String
+
+  """All values less than or equal the given value."""
+  category_lte: String
+
+  """All values greater than the given value."""
+  category_gt: String
+
+  """All values greater than or equal the given value."""
+  category_gte: String
+
+  """All values containing the given string."""
+  category_contains: String
+
+  """All values not containing the given string."""
+  category_not_contains: String
+
+  """All values starting with the given string."""
+  category_starts_with: String
+
+  """All values not starting with the given string."""
+  category_not_starts_with: String
+
+  """All values ending with the given string."""
+  category_ends_with: String
+
+  """All values not ending with the given string."""
+  category_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""

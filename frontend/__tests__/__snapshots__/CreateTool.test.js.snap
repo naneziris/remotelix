@@ -41,6 +41,20 @@ exports[`<CreateTool/> renders and matches snapshot 1`] = `
       />
     </label>
     <label
+      htmlFor="category"
+    >
+      Title
+      <input
+        id="category"
+        name="category"
+        onChange={[Function]}
+        placeholder="Category"
+        required={true}
+        type="text"
+        value=""
+      />
+    </label>
+    <label
       htmlFor="description"
     >
       Description

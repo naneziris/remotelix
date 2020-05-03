@@ -12,6 +12,7 @@ const CREATE_TOOL_MUTATION = gql`
     $image: String
     $largeImage: String
     $url: String!
+    $category: String
   ) {
     createTool(
       title: $title
@@ -19,6 +20,7 @@ const CREATE_TOOL_MUTATION = gql`
       image: $image
       largeImage: $largeImage
       url: $url
+      category: $category
     ) {
       id
     }
@@ -32,6 +34,7 @@ class CreateTool extends Component {
     image: '',
     largeImage: '',
     url: '',
+    category: '',
   };
   handleChange = e => {
     const { name, type, value } = e.target;
@@ -99,6 +102,19 @@ class CreateTool extends Component {
                   placeholder="Title"
                   required
                   value={this.state.title}
+                  onChange={this.handleChange}
+                />
+              </label>
+
+              <label htmlFor="category">
+                Title
+                <input
+                  type="text"
+                  id="category"
+                  name="category"
+                  placeholder="Category"
+                  required
+                  value={this.state.category}
                   onChange={this.handleChange}
                 />
               </label>

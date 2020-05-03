@@ -26,6 +26,7 @@ export default class Tool extends Component {
             <a>{tool.title}</a>
           </Link>
         </Title>
+        <p>{tool.category}</p>
         <p>{tool.description}</p>
         <p>{tool.url}</p>
 

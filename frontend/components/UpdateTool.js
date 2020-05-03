@@ -12,16 +12,18 @@ const SINGLE_TOOL_QUERY = gql`
       title
       description
       url
+      category
     }
   }
 `;
 const UPDATE_TOOL_MUTATION = gql`
-  mutation UPDATE_TOOL_MUTATION($id: ID!, $title: String, $description: String, $url: String) {
-    updateTool(id: $id, title: $title, description: $description, url: $url) {
+  mutation UPDATE_TOOL_MUTATION($id: ID!, $title: String, $description: String, $url: String, $category: String) {
+    updateTool(id: $id, title: $title, description: $description, url: $url, category: $category) {
       id
       title
       description
       url
+      category
     }
   }
 `;
@@ -69,6 +71,19 @@ class UpdateTool extends Component {
                         placeholder="Title"
                         required
                         defaultValue={data.tool.title}
+                        onChange={this.handleChange}
+                      />
+                    </label>
+
+                    <label htmlFor="category">
+                      Category
+                      <input
+                        type="text"
+                        id="category"
+                        name="category"
+                        placeholder="Category"
+                        required
+                        defaultValue={data.tool.category}
                         onChange={this.handleChange}
                       />
                     </label>

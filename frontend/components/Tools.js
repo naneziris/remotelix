@@ -15,6 +15,7 @@ const ALL_TOOLS_QUERY = gql`
       image
       largeImage
       url
+      category
     }
   }
 `;

@@ -32,6 +32,7 @@ const SINGLE_TOOL_QUERY = gql`
       description
       largeImage
       url
+      category
     }
   }
 `;
@@ -57,6 +58,7 @@ class SingleTool extends Component {
               <img src={tool.largeImage} alt={tool.title} />
               <div className="details">
                 <h2>Viewing {tool.title}</h2>
+                <p>{tool.category}</p>
                 <p>{tool.description}</p>
                 <p>{tool.url}</p>
               </div>
