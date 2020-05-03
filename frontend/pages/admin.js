@@ -11,7 +11,7 @@ const Columns = styled.div`
 
 const SignupPage = props => (
   <Columns>
-    {/* <Signup /> */}
+    <Signup />
     <Signin />
     <RequestReset />
   </Columns>
