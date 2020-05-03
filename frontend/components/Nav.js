@@ -16,11 +16,11 @@ const Nav = () => (
         {me && (
           <>
             <Link href="/sell">
-              <a>Sell</a>
+              <a>Add tools</a>
             </Link>
-            <Link href="/me">
+            {/* <Link href="/me">
               <a>Account</a>
-            </Link>
+            </Link> */}
             <Signout />
           </>
         )}

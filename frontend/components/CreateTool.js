@@ -107,7 +107,7 @@ class CreateTool extends Component {
               </label>
 
               <label htmlFor="category">
-                Title
+                Category
                 <input
                   type="text"
                   id="category"
