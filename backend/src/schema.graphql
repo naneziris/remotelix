@@ -5,8 +5,8 @@ type SuccessMessage {
 }
 
 type Mutation {
-  createTool(title: String, description: String, url: String, image: String, largeImage: String, category: String): Tool!
-  updateTool(id: ID!, title: String, description: String, url: String, category: String): Tool!
+  createTool(title: String, titleToLowerCase: String, description: String, url: String, image: String, largeImage: String, category: String): Tool!
+  updateTool(id: ID!, title: String, description: String, titleToLowerCase: String, url: String, image: String, largeImage: String, category: String): Tool!
   deleteTool(id: ID!): Tool
   signup(email: String!, password: String!, name: String!): User!
   signin(email: String!, password: String!): User!

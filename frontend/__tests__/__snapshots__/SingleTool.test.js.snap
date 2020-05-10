@@ -11,13 +11,28 @@ exports[`<SingleTool/> Errors with a not found tool 1`] = `
 </p>
 `;
 
-exports[`<SingleTool/> renders with proper data 1`] = `null`;
+exports[`<SingleTool/> renders with proper data 1`] = `
+<h2>
+  Viewing 
+  dogs are best
+</h2>
+`;
 
-exports[`<SingleTool/> renders with proper data 2`] = `null`;
+exports[`<SingleTool/> renders with proper data 2`] = `
+<img
+  alt="dogs are best"
+  src="dog.jpg"
+/>
+`;
 
 exports[`<SingleTool/> renders with proper data 3`] = `
-<p>
-  No Tool Found for 
-  123
-</p>
+Array [
+  <p />,
+  <p>
+    dogs
+  </p>,
+  <p>
+    www.remotelix.com/tool/nikos
+  </p>,
+]
 `;

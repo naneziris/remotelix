@@ -4,14 +4,16 @@ import casual from 'casual';
 casual.seed(777);
 
 const fakeTool = () => ({
-  __typename: 'Item',
+  __typename: 'Tool',
   id: 'abc123',
   url: 'www.remotelix.com/tool/nikos',
   user: null,
   image: 'dog-small.jpg',
   title: 'dogs are best',
+  titleToLowerCase: 'dogs are best',
   description: 'dogs',
   largeImage: 'dog.jpg',
+  category: '',
 });
 
 const fakeUser = () => ({

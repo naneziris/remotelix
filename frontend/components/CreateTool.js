@@ -8,6 +8,7 @@ import Error from './ErrorMessage';
 const CREATE_TOOL_MUTATION = gql`
   mutation CREATE_TOOL_MUTATION(
     $title: String!
+    $titleToLowerCase: String!
     $description: String!
     $image: String
     $largeImage: String
@@ -16,6 +17,7 @@ const CREATE_TOOL_MUTATION = gql`
   ) {
     createTool(
       title: $title
+      titleToLowerCase: $titleToLowerCase
       description: $description
       image: $image
       largeImage: $largeImage
@@ -30,6 +32,7 @@ const CREATE_TOOL_MUTATION = gql`
 class CreateTool extends Component {
   state = {
     title: '',
+    titleToLowerCase: '',
     description: '',
     image: '',
     largeImage: '',
@@ -39,7 +42,15 @@ class CreateTool extends Component {
   handleChange = e => {
     const { name, type, value } = e.target;
     const val = type === 'number' ? parseFloat(value) : value;
-    this.setState({ [name]: val });
+    // Add exceptions for title to save it also in lower case
+    if (name === 'title') {
+      this.setState({
+        title: val,
+        titleToLowerCase: val.toLowerCase()
+       });
+    } else {
+      this.setState({ [name]: val });
+    }
   };
 
   uploadFile = async e => {

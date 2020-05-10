@@ -37,7 +37,7 @@ const SearchStyles = styled.div`
     width: 100%;
     padding: 10px;
     border: 0;
-    font-size: 2rem;
+    font-size: 1.4rem;
     &.loading {
       animation: ${glow} 0.5s ease-in-out infinite alternate;
     }

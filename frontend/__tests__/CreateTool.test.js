@@ -67,18 +67,20 @@ describe('<CreateTool/>', () => {
           query: CREATE_TOOL_MUTATION,
           variables: {
             title: tool.title,
+            titleToLowerCase: tool.titleToLowerCase,
             description: tool.description,
             image: '',
             largeImage: '',
             url: '',
+            category: '',
           },
         },
         result: {
           data: {
             createTool: {
               ...fakeTool,
-              id: 'abc123',
               __typename: 'Tool',
+              id: 'abc123',
             },
           },
         },

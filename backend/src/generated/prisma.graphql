@@ -1,5 +1,5 @@
 # source: https://remo-prod-e54e756957.herokuapp.com/remo-prod/prod
-# timestamp: Sun May 03 2020 19:04:14 GMT+0300 (Eastern European Summer Time)
+# timestamp: Sun May 10 2020 13:57:13 GMT+0300 (Eastern European Summer Time)
 
 type AggregateTool {
   count: Int!
@@ -96,6 +96,7 @@ type Subscription {
 type Tool implements Node {
   id: ID!
   title: String!
+  titleToLowerCase: String!
   description: String!
   image: String
   largeImage: String
@@ -119,6 +120,7 @@ type ToolConnection {
 input ToolCreateInput {
   id: ID
   title: String!
+  titleToLowerCase: String!
   description: String!
   image: String
   largeImage: String
@@ -141,6 +143,8 @@ enum ToolOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  titleToLowerCase_ASC
+  titleToLowerCase_DESC
   description_ASC
   description_DESC
   image_ASC
@@ -160,6 +164,7 @@ enum ToolOrderByInput {
 type ToolPreviousValues {
   id: ID!
   title: String!
+  titleToLowerCase: String!
   description: String!
   image: String
   largeImage: String
@@ -210,6 +215,7 @@ input ToolSubscriptionWhereInput {
 
 input ToolUpdateInput {
   title: String
+  titleToLowerCase: String
   description: String
   image: String
   largeImage: String
@@ -220,6 +226,7 @@ input ToolUpdateInput {
 
 input ToolUpdateManyMutationInput {
   title: String
+  titleToLowerCase: String
   description: String
   image: String
   largeImage: String
@@ -316,6 +323,46 @@ input ToolWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
+  titleToLowerCase: String
+
+  """All values that are not equal to given value."""
+  titleToLowerCase_not: String
+
+  """All values that are contained in given list."""
+  titleToLowerCase_in: [String!]
+
+  """All values that are not contained in given list."""
+  titleToLowerCase_not_in: [String!]
+
+  """All values less than the given value."""
+  titleToLowerCase_lt: String
+
+  """All values less than or equal the given value."""
+  titleToLowerCase_lte: String
+
+  """All values greater than the given value."""
+  titleToLowerCase_gt: String
+
+  """All values greater than or equal the given value."""
+  titleToLowerCase_gte: String
+
+  """All values containing the given string."""
+  titleToLowerCase_contains: String
+
+  """All values not containing the given string."""
+  titleToLowerCase_not_contains: String
+
+  """All values starting with the given string."""
+  titleToLowerCase_starts_with: String
+
+  """All values not starting with the given string."""
+  titleToLowerCase_not_starts_with: String
+
+  """All values ending with the given string."""
+  titleToLowerCase_ends_with: String
+
+  """All values not ending with the given string."""
+  titleToLowerCase_not_ends_with: String
   description: String
 
   """All values that are not equal to given value."""

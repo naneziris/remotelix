@@ -20,6 +20,7 @@ type User {
 type Tool {
   id: ID! @id
   title: String!
+  titleToLowerCase: String!
   description: String!
   image: String
   largeImage: String

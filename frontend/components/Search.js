@@ -8,7 +8,7 @@ import { DropDown, DropDownItem, SearchStyles } from './styles/DropDown';
 
 const SEARCH_TOOLS_QUERY = gql`
   query SEARCH_TOOLS_QUERY($searchTerm: String!) {
-    tools(where: { OR: [{ title_contains: $searchTerm }, { description_contains: $searchTerm }, { category_contains: $searchTerm }] }) {
+    tools(where: { OR: [{ titleToLowerCase_contains: $searchTerm }, { description_contains: $searchTerm }, { category_contains: $searchTerm }] }) {
       id
       image
       title
@@ -36,7 +36,7 @@ class AutoComplete extends React.Component {
     // Manually query apollo client
     const res = await client.query({
       query: SEARCH_TOOLS_QUERY,
-      variables: { searchTerm: e.target.value },
+      variables: { searchTerm: e.target.value.toLowerCase() },
     });
     this.setState({
       tools: res.data.tools,

@@ -43,7 +43,7 @@ exports[`<CreateTool/> renders and matches snapshot 1`] = `
     <label
       htmlFor="category"
     >
-      Title
+      Category
       <input
         id="category"
         name="category"

@@ -17,8 +17,8 @@ const SINGLE_TOOL_QUERY = gql`
   }
 `;
 const UPDATE_TOOL_MUTATION = gql`
-  mutation UPDATE_TOOL_MUTATION($id: ID!, $title: String, $description: String, $url: String, $category: String) {
-    updateTool(id: $id, title: $title, description: $description, url: $url, category: $category) {
+  mutation UPDATE_TOOL_MUTATION($id: ID!, $title: String, $titleToLowerCase: String!, $description: String, $url: String, $category: String) {
+    updateTool(id: $id, title: $title, titleToLowerCase: $titleToLowerCase, description: $description, url: $url, category: $category) {
       id
       title
       description
@@ -33,7 +33,15 @@ class UpdateTool extends Component {
   handleChange = e => {
     const { name, type, value } = e.target;
     const val = type === 'number' ? parseFloat(value) : value;
-    this.setState({ [name]: val });
+    // Add exceptions for title to save it also in lower case
+    if (name === 'title') {
+    this.setState({
+      title: val,
+      titleToLowerCase: val.toLowerCase()
+      });
+    } else {
+      this.setState({ [name]: val });
+    }
   };
   updateTool = async (e, updateToolMutation) => {
     e.preventDefault();
