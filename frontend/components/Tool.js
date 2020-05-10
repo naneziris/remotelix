@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Title from './styles/Title';
 import ToolStyles from './styles/ToolStyles';
 import DeleteTool from './DeleteTool';
+import User from './User';
 
 export default class Tool extends Component {
   static propTypes = {
@@ -13,35 +14,43 @@ export default class Tool extends Component {
   render() {
     const { tool } = this.props;
     return (
-      <ToolStyles>
-        {tool.image && <img src={tool.image} alt={tool.title} />}
+      <User>
+        {({ data }) => {
+          const me = data ? data.me : null
+          return (
+            <ToolStyles>
+              {tool.image && <img src={tool.image} alt={tool.title} />}
 
-        <Title>
-          <Link
-            href={{
-              pathname: '/tool',
-              query: { id: tool.id },
-            }}
-          >
-            <a>{tool.title}</a>
-          </Link>
-        </Title>
-        <p>{tool.category}</p>
-        <p>{tool.description}</p>
-        <p>{tool.url}</p>
-
-        <div className="buttonList">
-          <Link
-            href={{
-              pathname: 'update',
-              query: { id: tool.id },
-            }}
-          >
-            <a>Edit ✏️</a>
-          </Link>
-          <DeleteTool id={tool.id}>Delete This Tool</DeleteTool>
-        </div>
-      </ToolStyles>
+              <Title>
+                <Link
+                  href={{
+                    pathname: '/tool',
+                    query: { id: tool.id },
+                  }}
+                >
+                  <a>{tool.title}</a>
+                </Link>
+              </Title>
+              <p>{tool.category}</p>
+              <p>{tool.description}</p>
+              <p>{tool.url}</p>
+              {me?.id &&
+                <div className="buttonList">
+                  <Link
+                    href={{
+                      pathname: 'update',
+                      query: { id: tool.id },
+                    }}
+                  >
+                    <a>Edit ✏️</a>
+                  </Link>
+                  <DeleteTool id={tool.id}>Delete This Tool</DeleteTool>
+                </div>
+              }
+            </ToolStyles>
+          )}
+        }
+      </User>
     );
   }
 }

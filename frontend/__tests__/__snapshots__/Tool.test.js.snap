@@ -1,56 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Tool/> renders and matches the snapshot 1`] = `
-<ToolStyles__Tool>
-  <img
-    alt="A Cool tool"
-    src="dog.jpg"
-  />
-  <Title>
-    <Link
-      href={
-        Object {
-          "pathname": "/tool",
-          "query": Object {
-            "id": "ABC123",
-          },
-        }
-      }
-    >
-      <a>
-        A Cool tool
-      </a>
-    </Link>
-  </Title>
-  <p />
-  <p>
-    This tool is really cool!
-  </p>
-  <p>
-    www.remotelix.com
-  </p>
-  <div
-    className="buttonList"
-  >
-    <Link
-      href={
-        Object {
-          "pathname": "update",
-          "query": Object {
-            "id": "ABC123",
-          },
-        }
-      }
-    >
-      <a>
-        Edit ✏️
-      </a>
-    </Link>
-    <DeleteTool
-      id="ABC123"
-    >
-      Delete This Tool
-    </DeleteTool>
-  </div>
-</ToolStyles__Tool>
+<User>
+  <Component />
+</User>
 `;
